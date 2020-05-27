@@ -1,5 +1,6 @@
 {
   "name": "svelte-rough-notation",
+  "version": "0.0.1",
   "svelte": "src/RoughNotation.svelte",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
