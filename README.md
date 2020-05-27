@@ -21,7 +21,7 @@ Any unrecognized property you apply to a `RoughNotation` component is passed thr
 
 Annotation groups work but aren't ideal yet. The component exposes the internal annotation object on the `annotation` property, and you have to pass that property to the annotation group.
 
-```
+```js
 let ag = annotationGroup([rn1.annotation, rn2.annotation]);
 setTimeout(() => ag.show());
 ```
