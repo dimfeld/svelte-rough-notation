@@ -9,8 +9,11 @@ The component can be toggled by setting the `visible` boolean property, or throu
   import { onMount } from 'svelte';
 
   let rn;
+  let visible = false;
   onMount(() => {
-    rn.visible = true; // or rn.show()
+    setTimeout(() => {
+      visible = true; // or rn.visible = true or rn.show()
+    }, 1000);
   });
 </script>
 
@@ -25,3 +28,5 @@ Annotation groups work but aren't ideal yet. The component exposes the internal 
 let ag = annotationGroup([rn1.annotation, rn2.annotation]);
 setTimeout(() => ag.show());
 ```
+
+Check it out [in the Svelte REPL](https://svelte.dev/repl/e0346ec2945e4b3abbaceebf50163d2d?version=3.23.0)!
