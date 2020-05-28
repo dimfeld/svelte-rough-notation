@@ -19,8 +19,8 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^6.0.0",
-    "rollup": "^1.20.0",
+    "@rollup/plugin-node-resolve": "^8.0.0",
+    "rollup": "^2.11.2",
     "rollup-plugin-svelte": "^5.0.0",
     "svelte": "^3.0.0"
   },
@@ -33,6 +33,6 @@
     "dist"
   ],
   "dependencies": {
-    "rough-notation": "^0.1.0"
+    "rough-notation": "^0.2.0"
   }
 }
