@@ -1,6 +1,6 @@
 {
   "name": "svelte-rough-notation",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "svelte": "src/RoughNotation.svelte",
   "module": "dist/index.mjs",
@@ -25,7 +25,7 @@
     "svelte": "^3.0.0"
   },
   "keywords": [
-    "svelte", 
+    "svelte",
     "rough"
   ],
   "files": [
