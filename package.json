@@ -5,6 +5,15 @@
   "svelte": "src/RoughNotation.svelte",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
+  "author": "Daniel Imfeld",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimfeld/svelte-rough-notation.git"
+  },
+  "homepage": "https://github.com/dimfeld/svelte-rough-notation#readme",
+  "bugs": {
+    "url": "https://github.com/dimfeld/svelte-rough-notation/issues"
+  },
   "scripts": {
     "build": "rollup -c",
     "prepublishOnly": "npm run build"
@@ -16,7 +25,8 @@
     "svelte": "^3.0.0"
   },
   "keywords": [
-    "svelte"
+    "svelte", 
+    "rough"
   ],
   "files": [
     "src",
