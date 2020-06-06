@@ -5,6 +5,18 @@
 
   export let visible = false;
 
+  // Built-in fields. Use this instead of $$restProps so that properties set
+  // only after component creation will be passed through.
+  export let animate = undefined;
+  export let animationDuration = undefined;
+  export let animationDelay = undefined;
+  export let color = undefined;
+  export let strokeWidth = undefined;
+  export let padding = undefined;
+  export let iterations = undefined;
+  // This is undocumented but makes animation groups work.
+  export let _animationGroupDelay = undefined;
+
   // Emulate rough-notation API
   export const show = () => (visible = true);
   export const hide = () => (visible = false);
@@ -12,7 +24,17 @@
 
   export let annotation = undefined;
   onMount(() => {
-    annotation = annotate(container, { ...$$restProps });
+    annotation = annotate(container, {
+      animate,
+      animationDuration,
+      animationDelay,
+      color,
+      strokeWidth,
+      padding,
+      iterations,
+      // Graceful fallback for if new props are added
+      ...$$restProps,
+    });
     return () => annotation.remove();
   });
 
@@ -22,6 +44,38 @@
     } else {
       annotation.hide();
     }
+  }
+
+  $: if (annotation && animate !== undefined) {
+    annotation.animate = animate;
+  }
+
+  $: if (annotation && animationDuration !== undefined) {
+    annotation.animationDuration = animationDuration;
+  }
+
+  $: if (annotation && animationDelay !== undefined) {
+    annotation.animationDelay = animationDelay;
+  }
+
+  $: if (annotation && color !== undefined) {
+    annotation.color = color;
+  }
+
+  $: if (annotation && strokeWidth !== undefined) {
+    annotation.strokeWidth = strokeWidth;
+  }
+
+  $: if (annotation && padding !== undefined) {
+    annotation.padding = padding;
+  }
+
+  $: if (annotation && iterations !== undefined) {
+    annotation.iterations = iterations;
+  }
+
+  $: if (annotation && _animationGroupDelay !== undefined) {
+    annotation._animationGroupDelay = _animationGroupDelay;
   }
 </script>
 

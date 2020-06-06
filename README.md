@@ -1,11 +1,11 @@
 This is a Svelte wrapper around the [rough-notation](https://github.com/pshihn/rough-notation) library.
 
-The component can be toggled by setting the `visible` boolean property, or through the same `show` and `hide` API exposed by the original component.
+The component can be toggled by setting the `visible` boolean property, or through the same `show` and `hide` API exposed by the original component. It also has properties for each configuration option exposed by rough-notation, and these can be updated after the component is created.
 
 ```html
 
 <script>
-  import RoughNotation from 'svelte-rough-notation';
+  import Annotation from 'svelte-rough-notation';
   import { onMount } from 'svelte';
 
   let rn;
@@ -17,16 +17,30 @@ The component can be toggled by setting the `visible` boolean property, or throu
   });
 </script>
 
-<RoughNotation bind:visible bind:this={rn} type="box" padding={10}>Some text</RoughNotation>
+<Annotation bind:visible bind:this={rn} type="box" padding={10}>Some text</Annotation>
 ```
 
-Any unrecognized property you apply to a `RoughNotation` component is passed through to the configuration of the underlying annotation object, so you can use any of the supported options.
+Annotation groups work as well. The `rough-notation` group implementation uses an undocumented attribute of the annotation, but this Svelte wrapper supports it, so you can just pass the component instance directly to the annotation group.
 
-Annotation groups work but aren't ideal yet. The component exposes the internal annotation object on the `annotation` property, and you have to pass that property to the annotation group.
+```html
+<script>
+  import Annotation from "svelte-rough-notation";
+  import { annotationGroup } from "rough-notation";
+  import { onMount } from "svelte";
 
-```js
-let ag = annotationGroup([rn1.annotation, rn2.annotation]);
-setTimeout(() => ag.show());
+  let groupAnnotations = [];
+  onMount(() => {
+    ag = annotationGroup(groupAnnotations);
+  });
+
+</script>
+
+
+<button on:click={() => ag.show()}>Show Group</button>
+Here we have
+<Annotation bind:this={groupAnnotations[0]} type="underline" color="red">some important things</Annotation>
+and also
+<Annotation bind:this={groupAnnotations[1]} type="box" color="green">some more things</Annotation>
 ```
 
 Check it out [in the Svelte REPL](https://svelte.dev/repl/e0346ec2945e4b3abbaceebf50163d2d?version=3.23.0)!

@@ -33,6 +33,6 @@
     "dist"
   ],
   "dependencies": {
-    "rough-notation": "^0.2.0"
+    "rough-notation": "^0.3.0"
   }
 }
