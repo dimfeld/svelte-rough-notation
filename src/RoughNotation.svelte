@@ -14,8 +14,11 @@
   export let strokeWidth = undefined;
   export let padding = undefined;
   export let iterations = undefined;
+  export let multiline = undefined;
   // This is undocumented but makes animation groups work.
   export let _animationGroupDelay = undefined;
+  // Same as above, but for versions after 0.3.1.
+  export let _animationDelay = undefined;
 
   // Emulate rough-notation API
   export const show = () => (visible = true);
@@ -32,6 +35,7 @@
       strokeWidth,
       padding,
       iterations,
+      multiline,
       // Graceful fallback for if new props are added
       ...$$restProps,
     });
@@ -77,6 +81,12 @@
   $: if (annotation && _animationGroupDelay !== undefined) {
     annotation._animationGroupDelay = _animationGroupDelay;
   }
+
+  $: if (annotation && _animationDelay !== undefined) {
+    annotation._animationDelay = _animationDelay;
+  }
+
+  // TODO Add multiline once rough-notation supports updating it
 </script>
 
 <svelte:options accessors={true} />

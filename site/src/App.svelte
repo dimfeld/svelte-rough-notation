@@ -30,6 +30,7 @@
   }
 
   let strokeWidth = 1;
+  let iterations = 1;
 </script>
 
 <style>
@@ -78,18 +79,45 @@
     </button>
   </p>
 
+  <p>
+    <span>Iterations: {iterations}</span>
+    <button
+      style="margin-left:2rem;width:2rem"
+      on:click={() => (iterations = Math.max(1, iterations - 1))}>
+      -
+    </button>
+    <button style="width:2rem" on:click={() => (iterations = iterations + 1)}>
+      +
+    </button>
+  </p>
+
   {#each types as { type, color }, index}
     <section>
       <Annotation
         bind:this={simpleAnnotations[index]}
         visible={showSimple}
         {strokeWidth}
+        {iterations}
         {color}
         {type}>
         {type}
       </Annotation>
     </section>
   {/each}
+
+  <section style="width:min-content;margin-left:auto;margin-right:auto">
+    <Annotation
+      bind:this={simpleAnnotations.multiline}
+      visible={showSimple}
+      {strokeWidth}
+      {iterations}
+      color="red"
+      type="box">
+      <p>This is some</p>
+      <p>Multiline text</p>
+
+    </Annotation>
+  </section>
 
   <h1>Annotation Group</h1>
 
@@ -106,6 +134,7 @@
       <Annotation
         bind:this={groupAnnotations[index]}
         {strokeWidth}
+        {iterations}
         {color}
         {type}>
         {type}
