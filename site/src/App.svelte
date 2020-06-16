@@ -105,17 +105,17 @@
     </section>
   {/each}
 
-  <section style="width:min-content;margin-left:auto;margin-right:auto">
+  <section style="margin-left:auto;margin-right:auto;max-width:10ch">
     <Annotation
       bind:this={simpleAnnotations.multiline}
       visible={showSimple}
+      multiline={true}
       {strokeWidth}
       {iterations}
-      color="red"
-      type="box">
-      <p>This is some</p>
-      <p>Multiline text</p>
-
+      padding={1}
+      color="lightgreen"
+      type="highlight">
+      This is a long wrapping multiline bit of text.
     </Annotation>
   </section>
 
