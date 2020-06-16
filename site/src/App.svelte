@@ -49,6 +49,8 @@
 
   section {
     margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   @media (min-width: 640px) {
@@ -105,7 +107,7 @@
     </section>
   {/each}
 
-  <section style="margin-left:auto;margin-right:auto;max-width:10ch">
+  <section style="max-width:10ch">
     <Annotation
       bind:this={simpleAnnotations.multiline}
       visible={showSimple}
