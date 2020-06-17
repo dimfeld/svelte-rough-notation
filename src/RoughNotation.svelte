@@ -86,7 +86,7 @@
     annotation._animationDelay = _animationDelay;
   }
 
-  // TODO Add multiline once rough-notation supports updating it
+  // Add multiline if rough-notation supports updating it
 </script>
 
 <svelte:options accessors={true} />

@@ -2,7 +2,7 @@
   "name": "svelte-rough-notation",
   "version": "0.1.2",
   "license": "MIT",
-  "svelte": "src/RoughNotation.svelte",
+  "svelte": "src/index.js",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
   "author": "Daniel Imfeld",

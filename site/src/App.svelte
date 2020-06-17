@@ -1,5 +1,5 @@
 <script>
-  import Annotation from "svelte-rough-notation";
+  import { default as Annotation, annotate } from "svelte-rough-notation";
   import { annotationGroup } from "rough-notation";
   import { onMount } from "svelte";
 
@@ -31,6 +31,7 @@
 
   let strokeWidth = 1;
   let iterations = 1;
+  let useActions = false;
 </script>
 
 <style>
@@ -69,6 +70,27 @@
     <label style="display:inline" for="show-simple">Show Annotations</label>
   </p>
 
+  <div>
+    <div>
+      <input
+        id="use-components"
+        type="radio"
+        bind:group={useActions}
+        value={false} />
+      <label style="display:inline" for="use-components">
+        Use Wrapper Component
+      </label>
+    </div>
+    <div>
+      <input
+        id="use-actions"
+        type="radio"
+        bind:group={useActions}
+        value={true} />
+      <label style="display:inline" for="use-actions">Use Svelte Actions</label>
+    </div>
+  </div>
+
   <p>
     <span>Stroke Width: {strokeWidth}</span>
     <button
@@ -95,30 +117,44 @@
 
   {#each types as { type, color }, index}
     <section>
-      <Annotation
-        bind:this={simpleAnnotations[index]}
-        visible={showSimple}
-        {strokeWidth}
-        {iterations}
-        {color}
-        {type}>
-        {type}
-      </Annotation>
+      {#if useActions}
+        <span
+          use:annotate={{ visible: showSimple, strokeWidth, iterations, color, type }}>
+          {type}
+        </span>
+      {:else}
+        <Annotation
+          bind:this={simpleAnnotations[index]}
+          visible={showSimple}
+          {strokeWidth}
+          {iterations}
+          {color}
+          {type}>
+          {type}
+        </Annotation>
+      {/if}
     </section>
   {/each}
 
   <section style="max-width:10ch">
-    <Annotation
-      bind:this={simpleAnnotations.multiline}
-      visible={showSimple}
-      multiline={true}
-      {strokeWidth}
-      {iterations}
-      padding={1}
-      color="lightgreen"
-      type="highlight">
-      This is a long wrapping multiline bit of text.
-    </Annotation>
+    {#if useActions}
+      <span
+        use:annotate={{ visible: showSimple, multiline: true, padding: 1, iterations, color: 'lightgreen', type: 'highlight' }}>
+        This is a long wrapping multiline bit of text
+      </span>
+    {:else}
+      <Annotation
+        bind:this={simpleAnnotations.multiline}
+        visible={showSimple}
+        multiline={true}
+        {strokeWidth}
+        {iterations}
+        padding={1}
+        color="lightgreen"
+        type="highlight">
+        This is a long wrapping multiline bit of text.
+      </Annotation>
+    {/if}
   </section>
 
   <h1>Annotation Group</h1>

@@ -8,10 +8,10 @@ const name = pkg.name
 	.replace(/-\w/g, m => m[1].toUpperCase());
 
 export default {
-	input: 'src/RoughNotation.svelte',
+	input: 'src/index.js',
 	output: [
-		{ file: pkg.module, 'format': 'es' },
-		{ file: pkg.main, 'format': 'umd', name }
+		{ file: pkg.module, 'format': 'es', exports: 'named' },
+		{ file: pkg.main, 'format': 'iife', name, exports: 'named' }
 	],
 	plugins: [
 		svelte(),

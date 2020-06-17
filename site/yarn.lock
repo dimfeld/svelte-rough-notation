@@ -869,7 +869,7 @@ supports-color@^6.1.0:
     has-flag "^3.0.0"
 
 svelte-rough-notation@../:
-  version "0.1.0"
+  version "0.1.2"
   dependencies:
     rough-notation "^0.3.0"
 
