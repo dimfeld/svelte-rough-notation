@@ -1,4 +1,4 @@
-This is a Svelte wrapper around the [rough-notation](https://github.com/pshihn/rough-notation) library.
+This is a Svelte wrapper around the [rough-notation](https://github.com/rough-stuff/rough-notation) library.
 
 It exposes both a wrapper component using a slot, and an action that can be used on a DOM element with Svelte's `use:` syntax.
 
