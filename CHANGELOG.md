@@ -1,3 +1,7 @@
+# 0.1.3
+
+- Add a Svelte action version that can be used with Svelte's `use:` syntax.
+
 # 0.1.2
 
 - Support iterations and multiline properties when `rough-notation` 0.3.3 is used.
