@@ -1,21 +1,25 @@
 <script>
-  import { default as Annotation, annotate } from "svelte-rough-notation";
-  import { annotationGroup } from "rough-notation";
-  import { onMount } from "svelte";
+  import { default as Annotation, annotate } from 'svelte-rough-notation';
+  import { annotationGroup } from 'rough-notation';
+  import { onMount, tick } from 'svelte';
 
   const types = [
-    { type: "underline", color: "red" },
-    { type: "box", color: "blue" },
-    { type: "circle", color: "green" },
-    { type: "highlight", color: "yellow" },
-    { type: "strike-through", color: "black" },
-    { type: "crossed-off", color: "rebeccapurple" },
+    { type: 'underline', color: 'red' },
+    { type: 'box', color: 'blue' },
+    { type: 'circle', color: 'green' },
+    { type: 'highlight', color: 'yellow' },
+    { type: 'strike-through', color: 'black' },
+    { type: 'crossed-off', color: 'rebeccapurple' },
+    {
+      type: 'bracket',
+      color: 'orange',
+      extra: { brackets: ['left', 'right'] },
+    },
   ];
 
-  let showSimple = false;
+  let showSimple = true;
 
   let ag;
-  let simpleAnnotations = [];
   let groupAnnotations = [];
   onMount(() => {
     ag = annotationGroup(groupAnnotations);
@@ -31,7 +35,7 @@
 
   let strokeWidth = 1;
   let iterations = 1;
-  let useActions = false;
+  let useActions = true;
 </script>
 
 <style>
@@ -58,6 +62,10 @@
     main {
       max-width: none;
     }
+  }
+
+  label {
+    display: inline;
   }
 </style>
 
@@ -115,21 +123,21 @@
     </button>
   </p>
 
-  {#each types as { type, color }, index}
+  {#each types as { type, color, extra }, index}
     <section>
       {#if useActions}
         <span
-          use:annotate={{ visible: showSimple, strokeWidth, iterations, color, type }}>
+          use:annotate={{ visible: showSimple, strokeWidth, iterations, color, type, ...(extra || {}) }}>
           {type}
         </span>
       {:else}
         <Annotation
-          bind:this={simpleAnnotations[index]}
           visible={showSimple}
           {strokeWidth}
           {iterations}
           {color}
-          {type}>
+          {type}
+          {...extra || {}}>
           {type}
         </Annotation>
       {/if}
@@ -139,12 +147,11 @@
   <section style="max-width:10ch">
     {#if useActions}
       <span
-        use:annotate={{ visible: showSimple, multiline: true, padding: 1, iterations, color: 'lightgreen', type: 'highlight' }}>
+        use:annotate={{ visible: showSimple, multiline: true, padding: 1, iterations, strokeWidth, color: 'lightgreen', type: 'highlight' }}>
         This is a long wrapping multiline bit of text
       </span>
     {:else}
       <Annotation
-        bind:this={simpleAnnotations.multiline}
         visible={showSimple}
         multiline={true}
         {strokeWidth}
@@ -164,7 +171,7 @@
       id="show-group"
       type="checkbox"
       on:change={(e) => showGroup(e.target.checked)} />
-    <label style="display:inline" for="show-group">Show Annotation Group</label>
+    <label for="show-group">Show Annotation Group</label>
   </span>
 
   {#each types as { type, color }, index}

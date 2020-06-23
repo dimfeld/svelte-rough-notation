@@ -20,7 +20,7 @@
     "svelte": "^3.23.0"
   },
   "dependencies": {
-    "rough-notation": "^0.3.0",
+    "rough-notation": "^0.4.0",
     "sirv-cli": "^0.4.4",
     "svelte-rough-notation": "../"
   }
