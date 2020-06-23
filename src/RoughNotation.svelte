@@ -1,6 +1,6 @@
 <script>
-  import { annotate } from "rough-notation";
-  import { onMount } from "svelte";
+  import { annotate } from 'rough-notation';
+  import { onMount } from 'svelte';
   let container;
 
   export let visible = false;
@@ -15,6 +15,7 @@
   export let padding = undefined;
   export let iterations = undefined;
   export let multiline = undefined;
+  export let brackets = undefined;
   // This is undocumented but makes animation groups work.
   export let _animationGroupDelay = undefined;
   // Same as above, but for versions after 0.3.1.
@@ -36,6 +37,7 @@
       padding,
       iterations,
       multiline,
+      brackets,
       // Graceful fallback for if new props are added
       ...$$restProps,
     });
@@ -76,6 +78,10 @@
 
   $: if (annotation && iterations !== undefined) {
     annotation.iterations = iterations;
+  }
+
+  $: if (annotation && brackets !== undefined) {
+    annotation.brackets = brackets;
   }
 
   $: if (annotation && _animationGroupDelay !== undefined) {
