@@ -1,3 +1,8 @@
+# 0.1.4
+
+- Support new `bracket` type and `brackets` argument
+- Update to `rough-notation ^0.4.0`
+
 # 0.1.3
 
 - Add a Svelte action version that can be used with Svelte's `use:` syntax.
