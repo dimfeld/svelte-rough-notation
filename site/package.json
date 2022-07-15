@@ -17,7 +17,7 @@
     "rollup-plugin-livereload": "^1.3.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
-    "svelte": "^3.23.0"
+    "svelte": "^3.49.0"
   },
   "dependencies": {
     "rough-notation": "^0.4.0",
