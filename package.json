@@ -3,6 +3,11 @@
   "version": "0.1.4",
   "license": "MIT",
   "svelte": "src/index.js",
+  "exports": {
+    ".": {
+      "svelte": "src/index.js"
+    }
+  },
   "module": "dist/index.mjs",
   "main": "dist/index.js",
   "author": "Daniel Imfeld",
