@@ -1,3 +1,7 @@
+# 0.1.5
+
+- Add exports field to package.json and perform other cleanup
+
 # 0.1.4
 
 - Support new `bracket` type and `brackets` argument
