@@ -1,15 +1,17 @@
 {
   "name": "svelte-rough-notation",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
+  "type": "module",
   "svelte": "src/index.js",
   "exports": {
     ".": {
-      "svelte": "src/index.js"
+      "svelte": "./src/index.js",
+      "default": "./src/index.js"
     }
   },
-  "module": "dist/index.mjs",
-  "main": "dist/index.js",
+  "module": "src/index.js",
+  "main": "src/index.js",
   "author": "Daniel Imfeld",
   "repository": {
     "type": "git",
@@ -20,13 +22,10 @@
     "url": "https://github.com/dimfeld/svelte-rough-notation/issues"
   },
   "scripts": {
-    "build": "rollup -c",
-    "prepublishOnly": "npm run build"
+    "build": "rollup -c"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^8.0.0",
-    "rollup": "^2.11.2",
-    "rollup-plugin-svelte": "^5.0.0",
+    "publint": "^0.2.7",
     "svelte": "^3.0.0"
   },
   "keywords": [
@@ -34,8 +33,7 @@
     "rough"
   ],
   "files": [
-    "src",
-    "dist"
+    "src"
   ],
   "dependencies": {
     "rough-notation": "^0.4.0"
