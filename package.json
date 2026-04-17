@@ -1,6 +1,6 @@
 {
   "name": "svelte-rough-notation",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "license": "MIT",
   "type": "module",
   "svelte": "src/index.js",
@@ -26,7 +26,10 @@
   },
   "devDependencies": {
     "publint": "^0.2.7",
-    "svelte": "^3.0.0"
+    "svelte": "^5.0.0"
+  },
+  "peerDependencies": {
+    "svelte": "^5.0.0"
   },
   "keywords": [
     "svelte",

@@ -1,32 +1,37 @@
 <script>
   import { annotate } from 'rough-notation';
   import { onMount } from 'svelte';
+
+  let {
+    visible = $bindable(false),
+    // Built-in fields. Use this instead of rest props so that properties set
+    // only after component creation will be passed through.
+    animate = undefined,
+    animationDuration = undefined,
+    animationDelay = undefined,
+    color = undefined,
+    strokeWidth = undefined,
+    padding = undefined,
+    iterations = undefined,
+    multiline = undefined,
+    brackets = undefined,
+    // This is undocumented but makes animation groups work.
+    _animationGroupDelay = undefined,
+    // Same as above, but for versions after 0.3.1.
+    _animationDelay = undefined,
+    annotation = $bindable(undefined),
+    children,
+    // Graceful fallback for if new props are added
+    ...rest
+  } = $props();
+
   let container;
 
-  export let visible = false;
-
-  // Built-in fields. Use this instead of $$restProps so that properties set
-  // only after component creation will be passed through.
-  export let animate = undefined;
-  export let animationDuration = undefined;
-  export let animationDelay = undefined;
-  export let color = undefined;
-  export let strokeWidth = undefined;
-  export let padding = undefined;
-  export let iterations = undefined;
-  export let multiline = undefined;
-  export let brackets = undefined;
-  // This is undocumented but makes animation groups work.
-  export let _animationGroupDelay = undefined;
-  // Same as above, but for versions after 0.3.1.
-  export let _animationDelay = undefined;
-
   // Emulate rough-notation API
-  export const show = () => (visible = true);
-  export const hide = () => (visible = false);
-  export const isShowing = () => visible;
+  export function show() { visible = true; }
+  export function hide() { visible = false; }
+  export function isShowing() { return visible; }
 
-  export let annotation = undefined;
   onMount(() => {
     annotation = annotate(container, {
       animate,
@@ -38,64 +43,82 @@
       iterations,
       multiline,
       brackets,
-      // Graceful fallback for if new props are added
-      ...$$restProps,
+      ...rest,
     });
     return () => annotation.remove();
   });
 
-  $: if (annotation) {
-    if (visible) {
-      annotation.show();
-    } else {
-      annotation.hide();
+  $effect(() => {
+    if (annotation) {
+      if (visible) {
+        annotation.show();
+      } else {
+        annotation.hide();
+      }
     }
-  }
+  });
 
-  $: if (annotation && animate !== undefined) {
-    annotation.animate = animate;
-  }
+  $effect(() => {
+    if (annotation && animate !== undefined) {
+      annotation.animate = animate;
+    }
+  });
 
-  $: if (annotation && animationDuration !== undefined) {
-    annotation.animationDuration = animationDuration;
-  }
+  $effect(() => {
+    if (annotation && animationDuration !== undefined) {
+      annotation.animationDuration = animationDuration;
+    }
+  });
 
-  $: if (annotation && animationDelay !== undefined) {
-    annotation.animationDelay = animationDelay;
-  }
+  $effect(() => {
+    if (annotation && animationDelay !== undefined) {
+      annotation.animationDelay = animationDelay;
+    }
+  });
 
-  $: if (annotation && color !== undefined) {
-    annotation.color = color;
-  }
+  $effect(() => {
+    if (annotation && color !== undefined) {
+      annotation.color = color;
+    }
+  });
 
-  $: if (annotation && strokeWidth !== undefined) {
-    annotation.strokeWidth = strokeWidth;
-  }
+  $effect(() => {
+    if (annotation && strokeWidth !== undefined) {
+      annotation.strokeWidth = strokeWidth;
+    }
+  });
 
-  $: if (annotation && padding !== undefined) {
-    annotation.padding = padding;
-  }
+  $effect(() => {
+    if (annotation && padding !== undefined) {
+      annotation.padding = padding;
+    }
+  });
 
-  $: if (annotation && iterations !== undefined) {
-    annotation.iterations = iterations;
-  }
+  $effect(() => {
+    if (annotation && iterations !== undefined) {
+      annotation.iterations = iterations;
+    }
+  });
 
-  $: if (annotation && brackets !== undefined) {
-    annotation.brackets = brackets;
-  }
+  $effect(() => {
+    if (annotation && brackets !== undefined) {
+      annotation.brackets = brackets;
+    }
+  });
 
-  $: if (annotation && _animationGroupDelay !== undefined) {
-    annotation._animationGroupDelay = _animationGroupDelay;
-  }
+  $effect(() => {
+    if (annotation && _animationGroupDelay !== undefined) {
+      annotation._animationGroupDelay = _animationGroupDelay;
+    }
+  });
 
-  $: if (annotation && _animationDelay !== undefined) {
-    annotation._animationDelay = _animationDelay;
-  }
-
-  // Add multiline if rough-notation supports updating it
+  $effect(() => {
+    if (annotation && _animationDelay !== undefined) {
+      annotation._animationDelay = _animationDelay;
+    }
+  });
 </script>
 
-<svelte:options accessors={true} />
 <div style="display:inline" bind:this={container}>
-  <slot />
+  {@render children?.()}
 </div>
