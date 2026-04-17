@@ -1,7 +1,7 @@
 <script>
   import { default as Annotation, annotate } from 'svelte-rough-notation';
   import { annotationGroup } from 'rough-notation';
-  import { onMount, tick } from 'svelte';
+  import { onMount } from 'svelte';
 
   const types = [
     { type: 'underline', color: 'red' },
@@ -17,10 +17,10 @@
     },
   ];
 
-  let showSimple = true;
+  let showSimple = $state(true);
 
   let ag;
-  let groupAnnotations = [];
+  let groupAnnotations = $state([]);
   onMount(() => {
     ag = annotationGroup(groupAnnotations);
   });
@@ -33,9 +33,9 @@
     }
   }
 
-  let strokeWidth = 1;
-  let iterations = 1;
-  let useActions = true;
+  let strokeWidth = $state(1);
+  let iterations = $state(1);
+  let useActions = $state(true);
 </script>
 
 <style>
@@ -103,10 +103,10 @@
     <span>Stroke Width: {strokeWidth}</span>
     <button
       style="margin-left:2rem;width:2rem"
-      on:click={() => (strokeWidth = Math.max(1, strokeWidth - 1))}>
+      onclick={() => (strokeWidth = Math.max(1, strokeWidth - 1))}>
       -
     </button>
-    <button style="width:2rem" on:click={() => (strokeWidth = strokeWidth + 1)}>
+    <button style="width:2rem" onclick={() => (strokeWidth = strokeWidth + 1)}>
       +
     </button>
   </p>
@@ -115,10 +115,10 @@
     <span>Iterations: {iterations}</span>
     <button
       style="margin-left:2rem;width:2rem"
-      on:click={() => (iterations = Math.max(1, iterations - 1))}>
+      onclick={() => (iterations = Math.max(1, iterations - 1))}>
       -
     </button>
-    <button style="width:2rem" on:click={() => (iterations = iterations + 1)}>
+    <button style="width:2rem" onclick={() => (iterations = iterations + 1)}>
       +
     </button>
   </p>
@@ -170,14 +170,14 @@
     <input
       id="show-group"
       type="checkbox"
-      on:change={(e) => showGroup(e.target.checked)} />
+      onchange={(e) => showGroup(e.target.checked)} />
     <label for="show-group">Show Annotation Group</label>
   </span>
 
   {#each types as { type, color }, index}
     <section>
       <Annotation
-        bind:this={groupAnnotations[index]}
+        bind:annotation={groupAnnotations[index]}
         {strokeWidth}
         {iterations}
         {color}
