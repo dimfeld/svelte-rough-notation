@@ -1,9 +1,7 @@
 <script>
   import Annotation from "svelte-rough-notation";
 
-  export let text;
-  export let type;
-  export let show;
+  let { text, type, show, ...rest } = $props();
 </script>
 
-<Annotation visible={show} {...$$restProps} {type}>{text}</Annotation>
+<Annotation visible={show} {...rest} {type}>{text}</Annotation>
